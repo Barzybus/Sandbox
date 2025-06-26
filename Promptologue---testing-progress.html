@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Promptologue - testing progress</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Quartz 4"/><meta property="og:title" content="Promptologue - testing progress"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Promptologue - testing progress"/><meta name="twitter:description" content="Contexte Promptologue, ton assistant en optimisation de prompts L’assistant optimiseur de prompts Mon prompt : “generate a 3-chapter course content to prepare me for training on perplexity."/><meta property="og:description" content="Contexte Promptologue, ton assistant en optimisation de prompts L’assistant optimiseur de prompts Mon prompt : “generate a 3-chapter course content to prepare me for training on perplexity."/><meta property="og:image:alt" content="Contexte Promptologue, ton assistant en optimisation de prompts L’assistant optimiseur de prompts Mon prompt : “generate a 3-chapter course content to prepare me for training on perplexity."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/Promptologue---testing-progress"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/Promptologue---testing-progress"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="Contexte Promptologue, ton assistant en optimisation de prompts L’assistant optimiseur de prompts Mon prompt : “generate a 3-chapter course content to prepare me for training on perplexity."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiRTpcXFN5bm9sb2d5RHJpdmVcXE1vblByb2pldFF1YXJ0elxccXVhcnR6XFxxdWFydHpcXGNvbXBvbmVudHNcXHN0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="./prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://quartz.jzhao.xyz/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/Promptologue---testing-progress-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/Promptologue---testing-progress-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/Promptologue---testing-progress-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Promptologue---testing-progress"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">Quartz 4</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Promptologue   testing progress</a></div></nav><h1 class="article-title">Promptologue - testing progress</h1><p show-comma="true" class="content-meta"><time datetime="2025-04-25T09:39:16.000Z">Apr 25, 2025</time><span>17 min read</span></p></div></div><article class="popover-hint"><blockquote class="callout note" data-callout="note">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Contexte </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p><a href="https://technopedia-cpeons.be/2025/04/22/prompt-assistant-en-optimisation-de-prompts/?fbclid=IwY2xjawJ4JldleHRuA2FlbQIxMABicmlkETFtUEpnYW4xMWRMNWYyeGlZAR4eTZ1fuYYEDXQ0pgCcrt2kxt6oY5M8xb3LRbFracUHmpWpy2hdI41mk0Y4FA_aem_wVlxj-G9yZTu7JKWkXOuWQ" class="external">Promptologue, ton assistant en optimisation de prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<a href="https://aistudio.google.com/app/prompts/1ue2M_HNgDEab80Qgt9aF5FWhuFyRaYV-" class="external">L’assistant optimiseur de prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<img src="./Pasted-image-20250425102944.png" width="auto" height="auto" alt/>
+<strong>Mon prompt : “generate a 3-chapter course content to prepare me for training on perplexity. only use online information since the beginning of 2025. Please use simple language in french so i can get up to speed quickly”</strong></p>
+</div>
+</div>
+</blockquote>
+<hr/>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Réponse générée par Google AI Studio : Gemini 2.5 Pro Preview 03-25 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p><strong>Votre prompt initial :</strong> “generate a 3-chapter course content to prepare me for training on perplexity. only use online information since the beginning of 2025. Please use simple language in french so i can get up to speed quickly”</p>
+</div>
+</div>
+</blockquote>
+<p>Parfait, merci ! Analysons maintenant ce prompt selon les 7 éléments clés :</p>
+<ol>
+<li><strong>{Rôle}</strong> : Implicite. Le prompt suggère que l’IA doit agir comme un <strong>Créateur de contenu pédagogique</strong> ou un <strong>Formateur</strong>.</li>
+<li><strong>{Compétences}</strong> : Implicite. Cela nécessite des compétences en <strong>recherche d’informations en ligne, synthèse, structuration de contenu de cours, pédagogie, rédaction en langage simple et maîtrise du sujet (Perplexity)</strong>.</li>
+<li><strong>{Objectif}</strong> : <strong>Se préparer</strong> rapidement à une formation sur “perplexity”. C’est le but final.</li>
+<li><strong>{Contexte}</strong> : L’utilisateur a besoin de se mettre à niveau rapidement avant une formation. L’information doit venir d’Internet et être (théoriquement) très récente (post-début 2025).</li>
+<li><strong>{Tâche}</strong> : <strong>Générer un contenu de cours</strong> en 3 chapitres. C’est l’action directe demandée.</li>
+<li><strong>{Process}</strong> : Implicite. Il faudrait : 1. Chercher l’info en ligne (avec la contrainte de date). 2. La synthétiser. 3. La structurer en 3 chapitres. 4. La rédiger en français simple.</li>
+<li><strong>{Caractéristiques}</strong> : Le résultat doit être : en <strong>3 chapitres</strong>, en <strong>français simple</strong>, utiliser des <strong>informations en ligne uniquement</strong>, et (contrainte problématique) <strong>postérieures à début 2025</strong>, pour une <strong>compréhension rapide</strong>.</li>
+</ol>
+<p><strong>Analyse des faiblesses et améliorations apportées :</strong></p>
+<ul>
+<li><strong>Imprécision du Rôle et des Compétences :</strong> Le prompt initial ne spécifie pas clairement qui doit être l’IA ni quelles compétences exactes sont requises. J’ai ajouté un rôle précis (“Concepteur Pédagogique spécialisé IA”) et les compétences associées pour guider l’IA.</li>
+<li><strong>Manque de Processus Explicite :</strong> Les étapes à suivre n’étaient pas définies. J’ai ajouté un processus clair pour structurer le travail de l’IA.</li>
+<li><strong>Contrainte Temporelle Impossible :</strong> La demande d’utiliser uniquement des informations “depuis le début de 2025” n’est pas réalisable, car nous ne sommes pas encore en 2025 et les modèles actuels n’ont pas accès à des informations futures ou aussi récentes par défaut. J’ai modifié cette contrainte pour demander les informations “les plus récentes et pertinentes disponibles en ligne”, ce qui est réalisable et respecte l’esprit de la demande.</li>
+<li><strong>Ambigüité sur “Perplexity” :</strong> S’agit-il de l’outil Perplexity AI ou du concept de perplexité en IA/linguistique ? J’ai supposé qu’il s’agissait de l’outil <strong>Perplexity AI</strong> et l’ai précisé.</li>
+<li><strong>Clarification de l’Objectif et du Contexte :</strong> J’ai reformulé pour mieux lier le contexte (préparation rapide) à l’objectif (comprendre les bases avant la formation).</li>
+<li><strong>Précision des Caractéristiques :</strong> J’ai détaillé un peu plus ce qui est attendu du résultat (niveau débutant, focus sur l’essentiel).</li>
+</ul>
+<p><strong>Voici la proposition de prompt optimisé :</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="prompt" data-theme="github-light github-dark"><code data-language="prompt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Tu es un Concepteur Pédagogique spécialisé dans les outils d'IA. Tu maîtrises la conception pédagogique, la recherche et la synthèse d'informations en ligne très récentes, la structuration de contenu de cours, la vulgarisation technique, et la rédaction en français simple et clair.</span></span>
+<span data-line> </span>
+<span data-line><span>Mon contexte est le suivant : Je dois bientôt suivre une formation sur l'outil Perplexity AI et je souhaite m'y préparer en acquérant rapidement les bases fondamentales pour comprendre de quoi il s'agit. Mon objectif est que tu me fournisses un contenu de cours concis pour comprendre rapidement ce qu'est Perplexity AI, ses fonctionnalités clés et ses cas d'usage principaux avant ma formation.</span></span>
+<span data-line> </span>
+<span data-line><span>Tu vas générer le contenu d'un mini-cours d'introduction en 3 chapitres distincts sur Perplexity AI.</span></span>
+<span data-line> </span>
+<span data-line><span>Pour ça, voici les étapes à suivre :</span></span>
+<span data-line><span>1. Identifier les informations les plus récentes et pertinentes disponibles en ligne concernant Perplexity AI (ses principes de fonctionnement, ses fonctionnalités majeures, ses avantages et limites éventuelles).</span></span>
+<span data-line><span>2. Synthétiser ces informations en te concentrant sur les éléments absolument essentiels pour un débutant qui doit découvrir l'outil rapidement.</span></span>
+<span data-line><span>3. Organiser le contenu synthétisé en une structure logique de 3 chapitres clairs et progressifs (par exemple : Chapitre 1: Qu'est-ce que Perplexity AI et comment ça marche ? ; Chapitre 2: Fonctionnalités clés et comment les utiliser ; Chapitre 3: Cas d'usage concrets et bonnes pratiques pour débuter).</span></span>
+<span data-line><span>4. Rédiger le contenu de chaque chapitre en français, en utilisant un langage très simple, direct et facile à comprendre. Évite le jargon technique autant que possible, ou explique-le très simplement si nécessaire.</span></span>
+<span data-line> </span>
+<span data-line><span>Voici les caractéristiques du résultat attendu :</span></span>
+<span data-line><span>- Contenu structuré en 3 chapitres distincts et bien délimités.</span></span>
+<span data-line><span>- Langage extrêmement simple, accessible (niveau grand débutant), et pédagogique.</span></span>
+<span data-line><span>- Focalisé sur la compréhension rapide et efficace des fondamentaux de Perplexity AI.</span></span>
+<span data-line><span>- Utilisation des informations les plus à jour et fiables disponibles publiquement en ligne (la contrainte initiale &quot;post-2025&quot; est remplacée par &quot;les plus récentes possibles&quot;).</span></span>
+<span data-line><span>- Le résultat doit être directement utilisable comme support de préparation rapide avant une formation.</span></span>
+<span data-line> </span>
+<span data-line><span>Si c’est OK pour toi, vas-y.</span></span></code></pre></figure>
+<hr/>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Utilisation du prompt optimisé dans Gemini 2.5 Flash (experimental) </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p>OK, parfaitement compris. En tant que Concepteur Pédagogique spécialisé en IA, je vais vous préparer ce mini-cours d’introduction très rapide et centré sur l’essentiel de Perplexity AI, en utilisant les informations les plus récentes disponibles pour que vous soyez bien préparé avant votre formation.</p>
+</div>
+</div>
+</blockquote>
+<p>Voici le contenu structuré en 3 chapitres :</p>
+<hr/>
+<h2 id="mini-cours-dintroduction-rapide-à-perplexity-ai">Mini-Cours d’Introduction Rapide à Perplexity AI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mini-cours-dintroduction-rapide-à-perplexity-ai" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ce mini-cours est conçu pour vous donner les bases de Perplexity AI avant votre formation. L’objectif est une compréhension rapide et efficace.</p>
+<h3 id="chapitre-1--quest-ce-que-perplexity-ai-et-en-quoi-est-ce-différent-">Chapitre 1 : Qu’est-ce que Perplexity AI et en quoi est-ce différent ?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-1--quest-ce-que-perplexity-ai-et-en-quoi-est-ce-différent-" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Imaginez que vous posez une question complexe à quelqu’un de très intelligent et très rapide, qui non seulement vous donne une réponse claire, mais vous montre aussi exactement où il a trouvé l’information, comme s’il ouvrait les livres et les sites web sous vos yeux. C’est un peu l’idée derrière Perplexity AI.</p>
+<p><strong>Perplexity AI, c’est quoi ?</strong></p>
+<p>Ce n’est pas juste un “chatbot” comme certains autres. C’est plutôt un <strong>moteur de recherche conversationnel</strong> alimenté par de l’intelligence artificielle (IA). Sa mission principale est de vous fournir des réponses précises et à jour à vos questions, en s’appuyant sur des informations trouvées en temps réel sur internet.</p>
+<p><strong>Comment ça marche, très simplement ?</strong></p>
+<ol>
+<li><strong>Vous posez une question :</strong> Comme vous le feriez sur un moteur de recherche classique ou à un chatbot.</li>
+<li><strong>Perplexity cherche sur internet :</strong> L’IA va explorer de nombreuses sources (sites web, articles, études, etc.) pour trouver des informations pertinentes sur votre sujet.</li>
+<li><strong>Perplexity synthétise la réponse :</strong> Au lieu de simplement vous donner une liste de liens (comme Google classique), l’IA lit, comprend et résume les informations qu’elle a trouvées pour construire une réponse cohérente et facile à lire.</li>
+<li><strong>Perplexity cite ses sources :</strong> Et c’est là une grande différence ! Pour chaque affirmation ou presque, Perplexity indique d’où vient l’information (quel site, quel article, etc.). Cela vous permet de vérifier l’information et d’aller plus loin si vous le souhaitez.</li>
+</ol>
+<p><strong>En quoi est-ce différent d’un simple chatbot ?</strong></p>
+<p>La différence clé est la <strong>transparence et l’accès à l’information en temps réel</strong>.</p>
+<ul>
+<li>Les chatbots “classiques” génèrent souvent du texte basé sur les énormes quantités de données sur lesquelles ils ont été entraînés, mais sans nécessairement chercher l’information la plus récente ou citer précisément d’où vient chaque élément de réponse. Ils peuvent parfois “inventer” des informations (on appelle ça de l’hallucination).</li>
+<li>Perplexity AI, lui, va activement chercher l’information <em>au moment où vous posez la question</em> et vous montre ses sources. Cela rend ses réponses souvent plus fiables, plus à jour et vérifiables. C’est un outil fait pour <strong>explorer et comprendre des sujets</strong> en s’appuyant sur des faits trouvés en ligne.</li>
+</ul>
+<p>En résumé : Pensez à Perplexity comme un assistant de recherche intelligent et transparent qui vous donne des réponses sourcées.</p>
+<h3 id="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-les-bases">Chapitre 2 : Fonctionnalités clés et comment les utiliser (les bases)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-les-bases" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Perplexity a plusieurs outils pour vous aider dans votre recherche. Voici les plus utiles pour débuter :</p>
+<ol>
+<li>
+<p><strong>La Barre de Recherche (ou “Ask anything…“) :</strong> C’est là que tout commence. Tapez simplement votre question ou le sujet qui vous intéresse le plus clairement possible. Soyez précis pour obtenir une meilleure réponse.</p>
+<ul>
+<li><em>Exemple :</em> “Quels sont les bienfaits du thé vert selon les études récentes ?”</li>
+</ul>
+</li>
+<li>
+<p><strong>Les Sources :</strong> Une fois que Perplexity a donné sa réponse, vous verrez des petits numéros entre crochets <code>[1]</code>, <code>[2]</code>, etc., dans le texte. À la fin de la réponse, il y a une section “Sources” qui liste les sites web ou articles correspondant à ces numéros.</p>
+<ul>
+<li><em>Comment utiliser :</em> Cliquez sur les numéros ou sur les liens dans la section Sources pour visiter les pages web originales et vérifier l’information ou lire plus en détail. C’est essentiel pour valider la réponse.</li>
+</ul>
+</li>
+<li>
+<p><strong>Les Questions Connexes (“Related Questions”) :</strong> Sous la réponse principale, Perplexity propose souvent d’autres questions que vous pourriez vous poser sur le même sujet.</p>
+<ul>
+<li><em>Comment utiliser :</em> Cliquez sur une question connexe pour lancer une nouvelle recherche et explorer des aspects liés à votre sujet initial sans avoir à taper une nouvelle requête complète. C’est super pour creuser un sujet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Les Modes de Recherche (“Focus”) :</strong> Perplexity peut limiter sa recherche à certains types de sources pour affiner les résultats. Vous trouverez cette option près de la barre de recherche ou en haut de la page de résultats. Les modes courants incluent :</p>
+<ul>
+<li><code>Academic</code>: pour trouver des articles de recherche et publications scientifiques.</li>
+<li><code>Writing</code>: pour générer du texte (attention, moins basé sur la recherche factuelle ici, plus sur la création).</li>
+<li><code>Wolfram|Alpha</code>: pour des calculs et des données factuelles précises.</li>
+<li><code>YouTube</code>: pour trouver des informations dans des vidéos.</li>
+<li><em>Comment utiliser :</em> Choisissez un mode avant de poser votre question si vous cherchez un type d’information spécifique. Par exemple, si vous cherchez des études, sélectionnez le mode <code>Academic</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Perplexity Copilot (version Pro, parfois limitée en version gratuite) :</strong> C’est un assistant conversationnel plus poussé qui peut vous poser des questions pour mieux comprendre votre besoin et affiner la recherche.</p>
+<ul>
+<li><em>Comment utiliser :</em> Si l’option Copilot est disponible, activez-la pour une interaction plus guidée. Perplexity pourrait vous demander de clarifier votre question ou vous proposer différentes pistes de recherche.</li>
+</ul>
+</li>
+</ol>
+<p>Pour débuter, concentrez-vous sur la barre de recherche, l’examen des sources et l’utilisation des questions connexes. Cela couvre l’essentiel.</p>
+<h3 id="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter">Chapitre 3 : Cas d’usage concrets et bonnes pratiques pour débuter<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Perplexity AI est particulièrement utile quand vous avez besoin d’une information fiable, récente et sourcée rapidement.</p>
+<p><strong>Cas d’usage typiques :</strong></p>
+<ul>
+<li><strong>Recherche d’informations précises et factuelles :</strong> “Quelle est la capitale de l’Australie ?”, “Quel est le PIB de la France en 2023 ?”, “Qui a découvert la pénicilline ?”</li>
+<li><strong>Comprendre un concept :</strong> “Explique-moi la relativité générale simplement”, “Qu’est-ce que l’inflation et quelles en sont les causes ?”</li>
+<li><strong>Explorer un sujet :</strong> “Quels sont les différents types d’énergies renouvelables ?”, “Histoire du jazz aux États-Unis.”</li>
+<li><strong>Préparer un sujet/une formation :</strong> Obtenir une synthèse rapide et sourcée sur un thème avant d’aller plus loin.</li>
+<li><strong>Trouver des données ou des statistiques récentes :</strong> En utilisant des modes comme <code>Academic</code> ou <code>Wolfram|Alpha</code> si pertinent.</li>
+<li><strong>Comparer des choses :</strong> “Quelles sont les différences entre Python et Java ?”</li>
+</ul>
+<p><strong>Bonnes pratiques pour bien démarrer :</strong></p>
+<ol>
+<li><strong>Posez des questions claires et spécifiques :</strong> Plus votre question est précise, meilleure sera la réponse. Évitez les questions trop vagues au début.
+<ul>
+<li><em>Plutôt que :</em> “Les chats”</li>
+<li><em>Préférez :</em> “Quelle est l’espérance de vie moyenne d’un chat domestique ?” ou “Quels sont les besoins nutritionnels d’un chaton ?”</li>
+</ul>
+</li>
+<li><strong>Vérifiez toujours les sources :</strong> C’est l’un des plus grands atouts de Perplexity. Prenez l’habitude de regarder d’où vient l’information, surtout pour des sujets importants ou techniques.</li>
+<li><strong>Utilisez les questions connexes pour approfondir :</strong> Ne vous arrêtez pas à la première réponse. Explorez les questions suggérées pour obtenir une vue d’ensemble plus complète du sujet.</li>
+<li><strong>Expérimentez les modes de recherche (Focus) :</strong> Si votre première recherche n’est pas satisfaisante, essayez de la relancer en choisissant un mode plus adapté à ce que vous cherchez (ex: <code>Academic</code> pour une recherche universitaire).</li>
+<li><strong>Perplexity est un outil, pas une vérité absolue :</strong> Bien qu’il soit fiable et transparent grâce aux sources, l’IA peut parfois mal interpréter une question ou synthétiser imparfaitement. Gardez un esprit critique et utilisez les sources pour valider.</li>
+<li><strong>Soyez patient :</strong> Parfois, la recherche et la synthèse prennent quelques secondes. C’est normal, car l’IA cherche activement l’information.</li>
+</ol>
+<p>Perplexity AI est un excellent outil pour vous aider à trouver, comprendre et vérifier des informations rapidement. Entraînez-vous à poser différentes sortes de questions et à explorer les résultats et les sources. Cela vous sera très utile lors de votre formation.</p>
+<hr/>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Testing initiation à Perplexity AI </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p><img src="./Pasted-image-20250425104939.png" width="auto" height="auto" alt/></p>
+</div>
+</div>
+</blockquote>
+<hr/>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Utilisation du prompt optimisé dans ChatGPT o4-mini </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p>Fonctions activées : Rechercher &amp; Raisonner</p>
+</div>
+</div>
+</blockquote>
+<p>Perplexity AI est un moteur de recherche conversationnel doté d’une version gratuite et d’un modèle freemium qui propose des options avancées en version Pro (<a href="https://en.wikipedia.org/wiki/Perplexity_AI?utm_source=chatgpt.com" class="external">Perplexity AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Il combine des modèles de langage (LLM) tels que GPT-3.5 et GPT-4 avec une navigation en temps réel sur le web pour générer des réponses concises, précises et sourcées (<a href="https://felloai.com/2024/12/perplexity-ai-everything-you-need-to-know-about-the-ai-search-engine/?utm_source=chatgpt.com" class="external">Perplexity AI: Everything You Need To Know About The AI Search …<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://en.wikipedia.org/wiki/Perplexity_AI?utm_source=chatgpt.com" class="external">Perplexity AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Voici un mini-cours en trois chapitres pour en maîtriser les bases avant votre formation.</p>
+<h2 id="chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche-">Chapitre 1 : Qu’est-ce que Perplexity AI et comment ça marche ?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche-" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Perplexity AI est conçu comme un « answer engine » : au lieu de lister des liens, il fournit une réponse directe à votre question, structurée et référencée (<a href="https://www.perplexity.ai/?utm_source=chatgpt.com" class="external">Perplexity AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).<br/>
+Pour chaque requête, l’outil interroge son propre LLM et le web en temps réel, puis synthétise les informations pertinentes en texte clair (<a href="https://felloai.com/2024/12/perplexity-ai-everything-you-need-to-know-about-the-ai-search-engine/?utm_source=chatgpt.com" class="external">Perplexity AI: Everything You Need To Know About The AI Search …<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).<br/>
+Les réponses incluent des citations numérotées, permettant de vérifier facilement la source de chaque information (<a href="https://www.lifewire.com/use-perplexity-ai-8729843?utm_source=chatgpt.com" class="external">Master Perplexity AI: Everything You Need to Know to Begin<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).<br/>
+La version Pro ajoute une recherche interne dans vos documents (PDF, Word, Excel), idéale pour l’exploitation de ressources pédagogiques ou administratives (<a href="https://en.wikipedia.org/wiki/Perplexity_AI?utm_source=chatgpt.com" class="external">Perplexity AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h2 id="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser">Chapitre 2 : Fonctionnalités clés et comment les utiliser<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="1-recherche-en-langage-naturel">1. Recherche en langage naturel<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-recherche-en-langage-naturel" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Il suffit de formuler votre question comme en conversation (« Quel est l’impact de l’IA en éducation ? ») et Perplexity renvoie une synthèse claire (<a href="https://www.perplexity.ai/discover?utm_source=chatgpt.com" class="external">Discover - Perplexity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h3 id="2-suivi-de-fil-de-discussion">2. Suivi de fil de discussion<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-suivi-de-fil-de-discussion" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Chaque requête ouvre un « thread » où vous pouvez poser des questions de suivi sans perdre le contexte de la recherche précédente (<a href="https://www.lifewire.com/use-perplexity-ai-8729843?utm_source=chatgpt.com" class="external">Master Perplexity AI: Everything You Need to Know to Begin<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h3 id="3-citations-intégrées">3. Citations intégrées<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-citations-intégrées" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Cliquez sur les numéros en fin de phrase pour voir la source d’origine : articles, études ou pages web (<a href="https://www.lifewire.com/use-perplexity-ai-8729843?utm_source=chatgpt.com" class="external">Master Perplexity AI: Everything You Need to Know to Begin<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h3 id="4-spaces-espaces-de-travail">4. Spaces (Espaces de travail)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-spaces-espaces-de-travail" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>La fonctionnalité Spaces permet de regrouper plusieurs threads, d’ajouter vos propres instructions et fichiers, et d’organiser vos recherches par projet (<a href="https://www.youtube.com/watch?pp=0gcJCdgAo7VqN5tD&amp;v=ArPU944U_q8&amp;utm_source=chatgpt.com" class="external">New Perplexity Spaces - Best AI Upgrade of 2024 - YouTube<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h3 id="5-applications-et-extensions">5. Applications et extensions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-applications-et-extensions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Perplexity est disponible sur navigateur, via une extension Chrome, et sur mobile Android et iOS pour consulter vos réponses où que vous soyez (<a href="https://www.lifewire.com/use-perplexity-ai-8729843?utm_source=chatgpt.com" class="external">Master Perplexity AI: Everything You Need to Know to Begin<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+<h2 id="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques">Chapitre 3 : Cas d’usage concrets et bonnes pratiques<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="cas-dusage">Cas d’usage<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cas-dusage" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>
+<p>Recherche rapide de définitions et mises à jour pédagogiques (<a href="https://gowinston.ai/perplexity-ai-review-chatgpt-google/?utm_source=chatgpt.com" class="external">Perplexity AI Review 2024 - Is it Better than ChatGPT, Google?<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+<li>
+<p>Résumé de longs documents ou articles pour préparer des séquences de formation (<a href="https://www.reddit.com/r/perplexity_ai/comments/1dmcf20/what_are_some_use_cases_for_perplexity_ai/?utm_source=chatgpt.com" class="external">What are some use cases for perplexity AI? : r/perplexity_ai - Reddit<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+<li>
+<p>Élaboration de contenus SEO ou de supports de cours en générant des paragraphes simples (<a href="https://www.reddit.com/r/perplexity_ai/comments/1dmcf20/what_are_some_use_cases_for_perplexity_ai/?utm_source=chatgpt.com" class="external">What are some use cases for perplexity AI? : r/perplexity_ai - Reddit<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+<li>
+<p>Veille et comparaison de perspectives en éducation numérique (<a href="https://mhthemes.com/blog/perplexity-ai-what-are-people-saying-in-2024/?utm_source=chatgpt.com" class="external">Perplexity AI: What Are People Saying in 2024? - MH Themes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+</ul>
+<h3 id="bonnes-pratiques">Bonnes pratiques<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#bonnes-pratiques" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>
+<p>Toujours vérifier les citations et cliquer sur les sources pour valider l’exactitude (<a href="https://www.fahimai.com/perplexity-ai?utm_source=chatgpt.com" class="external">Perplexity AI Review: Free AI-Powered Answer Engine in 2025?<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+<li>
+<p>Poser des questions précises et, si besoin, affiner avec des requêtes de suivi pour obtenir des détails (<a href="https://www.fahimai.com/perplexity-ai?utm_source=chatgpt.com" class="external">Perplexity AI Review: Free AI-Powered Answer Engine in 2025?<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+<li>
+<p>Utiliser la version Pro pour exploiter vos propres documents internes et centraliser vos recherches en un seul lieu (<a href="https://en.wikipedia.org/wiki/Perplexity_AI?utm_source=chatgpt.com" class="external">Perplexity AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</p>
+</li>
+</ul>
+<p>Ce mini-cours vous donne les clés pour commencer à utiliser Perplexity AI efficacement. Bonne préparation !</p>
+<hr/>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Utilisation du prompt optimisé avec Anthropic Claude </p></div>
+                  
+                </div>
+<div class="callout-content">
+<div class="callout-content-inner">
+<p>Fonctions activées : Claude 3.7 Sonnet - Style normal</p>
+</div>
+</div>
+</blockquote>
+<h1 id="mini-cours-dintroduction-à-perplexity-ai">MINI-COURS D’INTRODUCTION À PERPLEXITY AI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mini-cours-dintroduction-à-perplexity-ai" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche--1">Chapitre 1 : Qu’est-ce que Perplexity AI et comment ça marche ?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche--1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="définition-simple">Définition simple<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#définition-simple" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Perplexity AI est un moteur de recherche nouvelle génération qui utilise l’intelligence artificielle pour répondre directement à vos questions. Contrairement à Google qui vous propose des liens, Perplexity vous donne une réponse complète, synthétisée à partir de multiples sources d’internet.</p>
+<h3 id="son-fonctionnement-en-3-points">Son fonctionnement en 3 points<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#son-fonctionnement-en-3-points" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Compréhension des questions</strong> : L’outil analyse votre question pour en comprendre le sens exact</li>
+<li><strong>Recherche intelligente</strong> : Il consulte internet en temps réel pour trouver les informations les plus pertinentes et récentes</li>
+<li><strong>Synthèse des réponses</strong> : Il combine ces informations pour créer une réponse complète et structurée avec les sources utilisées</li>
+</ol>
+<h3 id="ce-qui-le-distingue-des-moteurs-de-recherche-classiques">Ce qui le distingue des moteurs de recherche classiques<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ce-qui-le-distingue-des-moteurs-de-recherche-classiques" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Vous obtenez directement une réponse complète, pas une liste de liens à explorer</li>
+<li>Les sources sont clairement indiquées, ce qui permet de vérifier l’information</li>
+<li>Vous pouvez poser des questions complémentaires pour approfondir, comme dans une conversation</li>
+</ul>
+<h3 id="les-limites-à-connaître">Les limites à connaître<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#les-limites-à-connaître" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Comme tout outil d’IA, il peut parfois générer des informations incorrectes</li>
+<li>La qualité des réponses dépend des sources disponibles sur internet</li>
+<li>Pour certains sujets très techniques ou très récents, les réponses peuvent être incomplètes</li>
+</ul>
+<h2 id="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-1">Chapitre 2 : Fonctionnalités clés et comment les utiliser<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="les-modes-de-recherche">Les modes de recherche<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#les-modes-de-recherche" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Mode conversationnel</strong> : Posez vos questions en langage naturel et poursuivez avec des questions complémentaires</li>
+<li><strong>Mode focus</strong> : Concentrez votre recherche sur un domaine précis (académique, récent, etc.)</li>
+<li><strong>Collection de sources</strong> : Demandez à Perplexity de consulter des sources spécifiques</li>
+</ul>
+<h3 id="les-fonctionnalités-pratiques">Les fonctionnalités pratiques<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#les-fonctionnalités-pratiques" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Historique des conversations</strong> : Retrouvez facilement vos recherches passées</li>
+<li><strong>Partage de résultats</strong> : Partagez vos recherches via un lien unique</li>
+<li><strong>Applications mobile et bureau</strong> : Accédez à Perplexity sur différents appareils</li>
+<li><strong>Copilot</strong> : Extension pour navigateur qui vous aide pendant votre navigation</li>
+</ul>
+<h3 id="comment-formuler-des-questions-efficaces">Comment formuler des questions efficaces<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#comment-formuler-des-questions-efficaces" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Soyez précis dans vos demandes</li>
+<li>Commencez par des questions simples puis affinez avec des questions complémentaires</li>
+<li>Utilisez des mots-clés pertinents</li>
+<li>Spécifiez si vous voulez une réponse détaillée ou synthétique</li>
+</ul>
+<h3 id="les-outils-complémentaires">Les outils complémentaires<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#les-outils-complémentaires" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Upload de documents</strong> : Analysez vos propres documents (PDF, images)</li>
+<li><strong>Génération d’images</strong> : Créez des images à partir de descriptions textuelles</li>
+<li><strong>Espace de travail Pro</strong> : Organisation et collaboration pour les utilisateurs premium</li>
+</ul>
+<h2 id="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter-1">Chapitre 3 : Cas d’usage concrets et bonnes pratiques pour débuter<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="cas-dusage-quotidiens">Cas d’usage quotidiens<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cas-dusage-quotidiens" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Recherche d’informations factuelles</strong> : “Quels sont les symptômes de la grippe saisonnière ?”</li>
+<li><strong>Résumé d’actualités</strong> : “Résume les dernières nouvelles sur la situation en Ukraine”</li>
+<li><strong>Aide à la décision</strong> : “Quels sont les avantages et inconvénients des voitures électriques ?”</li>
+<li><strong>Assistance pratique</strong> : “Comment faire une sauce béchamel sans grumeaux ?”</li>
+</ul>
+<h3 id="cas-dusage-professionnels">Cas d’usage professionnels<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cas-dusage-professionnels" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Veille d’information</strong> : Suivre les dernières tendances dans votre secteur</li>
+<li><strong>Recherche documentaire</strong> : Trouver rapidement des informations précises pour un projet</li>
+<li><strong>Analyse de marché</strong> : “Quelles sont les entreprises leaders dans le secteur des énergies renouvelables ?”</li>
+<li><strong>Rédaction assistée</strong> : Obtenir des idées et informations pour vos contenus</li>
+</ul>
+<h3 id="bonnes-pratiques-pour-débutants">Bonnes pratiques pour débutants<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#bonnes-pratiques-pour-débutants" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Commencez simplement</strong> : Familiarisez-vous avec l’interface en posant des questions basiques</li>
+<li><strong>Vérifiez les sources</strong> : Consultez toujours les liens fournis pour confirmer les informations</li>
+<li><strong>Affinez progressivement</strong> : Posez d’abord une question générale, puis précisez selon les réponses</li>
+<li><strong>Comparez les résultats</strong> : Pour les informations importantes, comparez avec d’autres sources</li>
+</ol>
+<h3 id="exercices-pratiques-pour-se-familiariser">Exercices pratiques pour se familiariser<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#exercices-pratiques-pour-se-familiariser" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Posez une question factuelle simple : “Quelle est la population de la France en 2024 ?”</li>
+<li>Demandez une explication : “Explique-moi simplement comment fonctionne le blockchain”</li>
+<li>Recherchez un sujet d’actualité : “Quelles sont les dernières avancées en matière d’énergie solaire ?”</li>
+<li>Testez une recherche professionnelle liée à votre domaine</li>
+</ol>
+<h3 id="points-dattention">Points d’attention<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#points-dattention" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Prenez l’habitude de vérifier les sources citées pour les informations cruciales</li>
+<li>N’hésitez pas à reformuler votre question si la réponse ne vous satisfait pas</li>
+<li>Gardez un esprit critique face aux réponses générées</li>
+<li>Exploitez la conversation continue pour approfondir votre recherche</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul class="toc-content overflow" id="list-1"><li class="depth-1"><a href="#mini-cours-dintroduction-rapide-à-perplexity-ai" data-for="mini-cours-dintroduction-rapide-à-perplexity-ai">Mini-Cours d’Introduction Rapide à Perplexity AI</a></li><li class="depth-2"><a href="#chapitre-1--quest-ce-que-perplexity-ai-et-en-quoi-est-ce-différent-" data-for="chapitre-1--quest-ce-que-perplexity-ai-et-en-quoi-est-ce-différent-">Chapitre 1 : Qu’est-ce que Perplexity AI et en quoi est-ce différent ?</a></li><li class="depth-2"><a href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-les-bases" data-for="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-les-bases">Chapitre 2 : Fonctionnalités clés et comment les utiliser (les bases)</a></li><li class="depth-2"><a href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter" data-for="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter">Chapitre 3 : Cas d’usage concrets et bonnes pratiques pour débuter</a></li><li class="depth-1"><a href="#chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche-" data-for="chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche-">Chapitre 1 : Qu’est-ce que Perplexity AI et comment ça marche ?</a></li><li class="depth-1"><a href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser" data-for="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser">Chapitre 2 : Fonctionnalités clés et comment les utiliser</a></li><li class="depth-2"><a href="#1-recherche-en-langage-naturel" data-for="1-recherche-en-langage-naturel">1. Recherche en langage naturel</a></li><li class="depth-2"><a href="#2-suivi-de-fil-de-discussion" data-for="2-suivi-de-fil-de-discussion">2. Suivi de fil de discussion</a></li><li class="depth-2"><a href="#3-citations-intégrées" data-for="3-citations-intégrées">3. Citations intégrées</a></li><li class="depth-2"><a href="#4-spaces-espaces-de-travail" data-for="4-spaces-espaces-de-travail">4. Spaces (Espaces de travail)</a></li><li class="depth-2"><a href="#5-applications-et-extensions" data-for="5-applications-et-extensions">5. Applications et extensions</a></li><li class="depth-1"><a href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques" data-for="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques">Chapitre 3 : Cas d’usage concrets et bonnes pratiques</a></li><li class="depth-2"><a href="#cas-dusage" data-for="cas-dusage">Cas d’usage</a></li><li class="depth-2"><a href="#bonnes-pratiques" data-for="bonnes-pratiques">Bonnes pratiques</a></li><li class="depth-0"><a href="#mini-cours-dintroduction-à-perplexity-ai" data-for="mini-cours-dintroduction-à-perplexity-ai">MINI-COURS D’INTRODUCTION À PERPLEXITY AI</a></li><li class="depth-1"><a href="#chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche--1" data-for="chapitre-1--quest-ce-que-perplexity-ai-et-comment-ça-marche--1">Chapitre 1 : Qu’est-ce que Perplexity AI et comment ça marche ?</a></li><li class="depth-2"><a href="#définition-simple" data-for="définition-simple">Définition simple</a></li><li class="depth-2"><a href="#son-fonctionnement-en-3-points" data-for="son-fonctionnement-en-3-points">Son fonctionnement en 3 points</a></li><li class="depth-2"><a href="#ce-qui-le-distingue-des-moteurs-de-recherche-classiques" data-for="ce-qui-le-distingue-des-moteurs-de-recherche-classiques">Ce qui le distingue des moteurs de recherche classiques</a></li><li class="depth-2"><a href="#les-limites-à-connaître" data-for="les-limites-à-connaître">Les limites à connaître</a></li><li class="depth-1"><a href="#chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-1" data-for="chapitre-2--fonctionnalités-clés-et-comment-les-utiliser-1">Chapitre 2 : Fonctionnalités clés et comment les utiliser</a></li><li class="depth-2"><a href="#les-modes-de-recherche" data-for="les-modes-de-recherche">Les modes de recherche</a></li><li class="depth-2"><a href="#les-fonctionnalités-pratiques" data-for="les-fonctionnalités-pratiques">Les fonctionnalités pratiques</a></li><li class="depth-2"><a href="#comment-formuler-des-questions-efficaces" data-for="comment-formuler-des-questions-efficaces">Comment formuler des questions efficaces</a></li><li class="depth-2"><a href="#les-outils-complémentaires" data-for="les-outils-complémentaires">Les outils complémentaires</a></li><li class="depth-1"><a href="#chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter-1" data-for="chapitre-3--cas-dusage-concrets-et-bonnes-pratiques-pour-débuter-1">Chapitre 3 : Cas d’usage concrets et bonnes pratiques pour débuter</a></li><li class="depth-2"><a href="#cas-dusage-quotidiens" data-for="cas-dusage-quotidiens">Cas d’usage quotidiens</a></li><li class="depth-2"><a href="#cas-dusage-professionnels" data-for="cas-dusage-professionnels">Cas d’usage professionnels</a></li><li class="depth-2"><a href="#bonnes-pratiques-pour-débutants" data-for="bonnes-pratiques-pour-débutants">Bonnes pratiques pour débutants</a></li><li class="depth-2"><a href="#exercices-pratiques-pour-se-familiariser" data-for="exercices-pratiques-pour-se-familiariser">Exercices pratiques pour se familiariser</a></li><li class="depth-2"><a href="#points-dattention" data-for="points-dattention">Points d’attention</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-2" class="overflow"><li><a href="./" class="internal">Mon Projet Quartz</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.1</a> © 2025</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">
+        const socket = new WebSocket('ws://localhost:3001')
+        // reload(true) ensures resources like images and scripts are fetched again in firefox
+        socket.addEventListener('message', () => document.location.reload(true))
+      </script><script src="./postscript.js" type="module"></script></html>
